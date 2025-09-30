@@ -44,3 +44,4 @@ class Task extends Equatable {
   List<Object?> get props => [id, title, description, assigneeId, deadline, priority, status];
 }
 
+

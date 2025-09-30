@@ -46,3 +46,4 @@ class ApplyFilter extends TaskEvent {
   List<Object?> get props => [query, assigneeId, priority];
 }
 
+

@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
 
   Future<Box<Map>> _initHive() async {
     await Hive.initFlutter();
-    final box = await Hive.openBox<Map>('${AppTitle}_tasks');
+    final box = await Hive.openBox<Map>('TaskManagement');
     return box;
   }
 }

@@ -452,64 +452,66 @@ class _TaskDialogState extends State<_TaskDialog> {
         key: _formKey,
         child: SizedBox(
           width: 360,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                controller: _title,
-                decoration: const InputDecoration(labelText: 'Title'),
-                validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<TaskPriority>(
-                value: _priority,
-                items: TaskPriority.values
-                    .map((p) => DropdownMenuItem(value: p, child: Text(p.name)))
-                    .toList(),
-                onChanged: (v) => setState(() => _priority = v ?? _priority),
-                decoration: const InputDecoration(labelText: 'Priority'),
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<TaskStatus>(
-                value: _status,
-                items: TaskStatus.values
-                    .map((s) => DropdownMenuItem(value: s, child: Text(s.name)))
-                    .toList(),
-                onChanged: (v) => setState(() => _status = v ?? _status),
-                decoration: const InputDecoration(labelText: 'Status'),
-              ),
-              const SizedBox(height: 12),
-              DropdownButtonFormField<Member>(
-                value: _assignee,
-                items: [
-                  const DropdownMenuItem<Member>(value: null, child: Text('Unassigned')),
-                  ...kMockMembers.map((m) => DropdownMenuItem(value: m, child: Text(m.name)))
-                ],
-                onChanged: (v) => setState(() => _assignee = v),
-                decoration: const InputDecoration(labelText: 'Assignee'),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(_deadline == null ? 'No deadline' : 'Deadline: ${_deadline!.toLocal()}'),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final now = DateTime.now();
-                      final picked = await showDatePicker(
-                        context: context,
-                        firstDate: DateTime(now.year - 1),
-                        lastDate: DateTime(now.year + 5),
-                        initialDate: _deadline ?? now,
-                      );
-                      if (picked != null) setState(() => _deadline = picked);
-                    },
-                    child: const Text('Pick date'),
-                  )
-                ],
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  controller: _title,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<TaskPriority>(
+                  value: _priority,
+                  items: TaskPriority.values
+                      .map((p) => DropdownMenuItem(value: p, child: Text(p.name)))
+                      .toList(),
+                  onChanged: (v) => setState(() => _priority = v ?? _priority),
+                  decoration: const InputDecoration(labelText: 'Priority'),
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<TaskStatus>(
+                  value: _status,
+                  items: TaskStatus.values
+                      .map((s) => DropdownMenuItem(value: s, child: Text(s.name)))
+                      .toList(),
+                  onChanged: (v) => setState(() => _status = v ?? _status),
+                  decoration: const InputDecoration(labelText: 'Status'),
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<Member>(
+                  value: _assignee,
+                  items: [
+                    const DropdownMenuItem<Member>(value: null, child: Text('Unassigned')),
+                    ...kMockMembers.map((m) => DropdownMenuItem(value: m, child: Text(m.name)))
+                  ],
+                  onChanged: (v) => setState(() => _assignee = v),
+                  decoration: const InputDecoration(labelText: 'Assignee'),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(_deadline == null ? 'No deadline' : 'Deadline: ${_deadline!.toLocal()}'),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        final now = DateTime.now();
+                        final picked = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime(now.year - 1),
+                          lastDate: DateTime(now.year + 5),
+                          initialDate: _deadline ?? now,
+                        );
+                        if (picked != null) setState(() => _deadline = picked);
+                      },
+                      child: const Text('Pick date'),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

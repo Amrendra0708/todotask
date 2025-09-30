@@ -55,3 +55,4 @@ class TaskState extends Equatable {
   List<Object?> get props => [isLoading, tasks, query, assigneeId, priority];
 }
 
+

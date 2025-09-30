@@ -10,3 +10,4 @@ class Member extends Equatable {
   List<Object?> get props => [id, name];
 }
 
+
